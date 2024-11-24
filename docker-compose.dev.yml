@@ -1,0 +1,20 @@
+# ./docker-compose.dev.yml
+version: '3.8'
+
+services:
+  quantum_db:
+    image: postgres:13
+    container_name: quantum_postgres_db
+    env_file:
+      - .env
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+      - ./db_dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    networks:
+      - quantum_docker_network
+    ports:
+      - '${DB_PORT}:${DB_PORT}'
+
+networks:
+  quantum_docker_network:
+    driver: bridge
