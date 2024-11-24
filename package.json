@@ -23,7 +23,8 @@
     "migration:run": "npm run typeorm -- migration:run -d src/typeorm.config.ts",
     "migration:revert": "npm run typeorm -- migration:revert -d src/typeorm.config.ts",
     "docker:db:up": "docker-compose -f docker-compose.db.yml up -d",
-    "docker:db:down": "docker-compose -f docker-compose.db.yml down"
+    "docker:db:down": "docker-compose -f docker-compose.db.yml down",
+    "generate:ssl": "mkdir -p ./ssl && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./ssl/nginx.key -out ./ssl/nginx.crt -subj \"/C=US/ST=State/L=City/O=Organization/OU=Unit/CN=localhost\""
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

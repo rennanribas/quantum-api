@@ -30,7 +30,23 @@ services:
     networks:
       - quantum_docker_network
     ports:
-      - '${PORT}:${PORT}'
+      - 3000:3000
+
+  nginx:
+    image: nginx:alpine
+    container_name: quantum_nginx
+    env_file:
+      - .env
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./ssl:/etc/nginx/ssl
+    networks:
+      - quantum_docker_network
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - app
 
 networks:
   quantum_docker_network:
